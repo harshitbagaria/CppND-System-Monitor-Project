@@ -107,7 +107,7 @@ long LinuxParser::Jiffies() {
 
 // Read and return the number of active jiffies for a PID
 long LinuxParser::ActiveJiffies(int pid) { 
-  string value;
+  string value, line;
   long actJiff=0;
   std::ifstream filestream(kProcDirectory+to_string(pid)+kStatFilename);
   if (filestream.is_open()) {
@@ -132,14 +132,14 @@ long LinuxParser::ActiveJiffies(int pid) {
 // Read and return the number of active jiffies for the system
 long LinuxParser::ActiveJiffies() { 
   vector<string> cpu = CpuUtilization();
-  return (stol(cpu[CPUStates::kUser_] + stol(cpu[CPUStates::kNice_] + stol(cpu[CPUStates::kSystem_] + stol(cpu[CPUStates::kIRQ_] + 
-          stol(cpu[CPUStates::kSoftIRQ_] + stol(cpu[CPUStates::kSteal_] + stol(cpu[CPUStates::kGuest_] + stol(cpu[CPUStates::kGuestNice_] );
+  return (stol(cpu[CPUStates::kUser_]) + stol(cpu[CPUStates::kNice_]) + stol(cpu[CPUStates::kSystem_]) + stol(cpu[CPUStates::kIRQ_]) + 
+          stol(cpu[CPUStates::kSoftIRQ_]) + stol(cpu[CPUStates::kSteal_]) + stol(cpu[CPUStates::kGuest_]) + stol(cpu[CPUStates::kGuestNice_]) );
 }
 
 // Read and return the number of idle jiffies for the system
 long LinuxParser::IdleJiffies() {
   vector<string> cpu = CpuUtilization();
-  return (stol(cpu[CPUStates::kIdle_] + stol(cpu[CPUStates::kIOwait_] );
+  return (stol(cpu[CPUStates::kIdle_]) + stol(cpu[CPUStates::kIOwait_]) );
 }
 
 // Read and return CPU utilization
