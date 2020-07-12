@@ -36,5 +36,5 @@ long int Process::UpTime() { return LinuxParser::UpTime(pid_); }
 
 // Overload the "less than" comparison operator for Process objects
 bool Process::operator<(Process const& a) const { 
-    return LinuxParser::ActiveJiffies(pid_) < LinuxParser::ActiveJiffies(pid_);
+    return LinuxParser::ActiveJiffies(pid_) > LinuxParser::ActiveJiffies(a.pid_);
 }

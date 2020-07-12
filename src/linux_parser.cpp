@@ -83,7 +83,7 @@ float LinuxParser::MemoryUtilization() {
           memFree=stol(value);
       }
     }
-    return (memTotal-memFree)/memTotal;
+    return (float)(memTotal-memFree)/memTotal;
   }
 }
 

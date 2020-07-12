@@ -2,5 +2,5 @@
 #include "linux_parser.h"
 // Return the aggregate CPU utilization
 float Processor::Utilization() { 
-    return LinuxParser::ActiveJiffies()/LinuxParser::Jiffies();
+    return (float)LinuxParser::ActiveJiffies()/(float)LinuxParser::Jiffies();
  }
