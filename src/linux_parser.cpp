@@ -35,13 +35,13 @@ string LinuxParser::OperatingSystem() {
 
 // DONE: An example of how to read data from the filesystem
 string LinuxParser::Kernel() {
-  string os, kernel;
+  string os, tmp,  kernel;
   string line;
   std::ifstream stream(kProcDirectory + kVersionFilename);
   if (stream.is_open()) {
     std::getline(stream, line);
     std::istringstream linestream(line);
-    linestream >> os >> kernel;
+    linestream >> os >> tmp >> kernel;
   }
   return kernel;
 }
@@ -168,8 +168,10 @@ int LinuxParser::TotalProcesses() {
         std::istringstream linestream(line);
         while (linestream >> key >> value) {
           if (key == "processes") 
+          {  
             totProc=std::stoi(value);
             return totProc;
+          }
         }
       }
   }
@@ -266,7 +268,7 @@ long LinuxParser::UpTime(int pid) {
   if (filestream.is_open()) {
     std::getline(filestream, line);
     std::istringstream linestream(line);
-    for (int i =0; i < 22; i++)
+    for (int i = 0; i < 22; i++)
       linestream >> value;
    }
    return stol(value)/sysconf(_SC_CLK_TCK);
